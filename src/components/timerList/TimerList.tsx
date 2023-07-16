@@ -8,7 +8,7 @@ function TimerList() {
   return (
     <div>
       {colNames.map((colName, colIndex) => {
-        return <Timer {...{ colName, colIndex }} />;
+        return <Timer key={colIndex} {...{ colName, colIndex }} />;
       })}
     </div>
   );
