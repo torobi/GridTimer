@@ -8,7 +8,7 @@ interface InitialState {
 export const timersCountSlice = createSlice({
   name: "timersCount",
   initialState: {
-    count: [],
+    count: [[]],
   } as InitialState,
   reducers: {
     addRow: (state) => {

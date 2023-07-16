@@ -8,7 +8,7 @@ interface InitialState {
 export const timersStateSlice = createSlice({
   name: "timersState",
   initialState: {
-    isRunning: [],
+    isRunning: [[]],
   } as InitialState,
   reducers: {
     addRow: (state) => {
@@ -49,4 +49,4 @@ export const selectTimersIsRunning = (
   state: ReturnType<typeof store.getState>
 ) => state.timersState.isRunning;
 
-export const { startAt, stopAll, addCol } = timersStateSlice.actions;
+export const { startAt, stopAll, addCol, addRow } = timersStateSlice.actions;

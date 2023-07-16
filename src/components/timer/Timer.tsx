@@ -16,7 +16,7 @@ function Timer({ colName, colIndex }: TimerProps) {
   const nameStyle: React.CSSProperties = { textAlign: "center" };
 
   return (
-    <>
+    <div>
       <input
         style={nameStyle}
         value={colName}
@@ -32,7 +32,7 @@ function Timer({ colName, colIndex }: TimerProps) {
           return <TimerButton key={rowIndex} {...{ colIndex, rowIndex }} />;
         })}
       </div>
-    </>
+    </div>
   );
 }
 
