@@ -1,4 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import store from "../store";
 
 interface InitialState {
   names: string[];
@@ -9,7 +10,7 @@ const DEFAULT_NAME = "timer";
 export const colNameSlice = createSlice({
   name: "colName",
   initialState: {
-    names: [],
+    names: ["timer"],
   } as InitialState,
   reducers: {
     add: (state) => {
@@ -24,8 +25,7 @@ export const colNameSlice = createSlice({
   },
 });
 
-export const selectColNames = (
-  state: ReturnType<typeof colNameSlice.reducer>
-) => state.names;
+export const selectColNames = (state: ReturnType<typeof store.getState>) =>
+  state.colName.names;
 
 export const { add, remove, rename } = colNameSlice.actions;
