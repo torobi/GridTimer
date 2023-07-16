@@ -5,8 +5,12 @@ import Timer from "../timer/Timer";
 function TimerList() {
   const colNames = useSelector(selectColNames);
 
+  const hContainer: React.CSSProperties = {
+    display: "flex",
+  };
+
   return (
-    <div>
+    <div style={hContainer}>
       {colNames.map((colName, colIndex) => {
         return <Timer key={colIndex} {...{ colName, colIndex }} />;
       })}

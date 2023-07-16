@@ -44,4 +44,4 @@ export const timersCountSlice = createSlice({
 export const selectTimersCount = (state: ReturnType<typeof store.getState>) =>
   state.timersCount.count;
 
-export const { increase } = timersCountSlice.actions;
+export const { increase, addCol, addRow } = timersCountSlice.actions;

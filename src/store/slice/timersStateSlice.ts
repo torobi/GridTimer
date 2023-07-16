@@ -49,4 +49,4 @@ export const selectTimersIsRunning = (
   state: ReturnType<typeof store.getState>
 ) => state.timersState.isRunning;
 
-export const { startAt, stopAll } = timersStateSlice.actions;
+export const { startAt, stopAll, addCol } = timersStateSlice.actions;
