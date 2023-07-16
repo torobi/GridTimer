@@ -1,4 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import store from "../store";
 
 interface InitialState {
   names: string[];
@@ -15,7 +16,7 @@ export const rowNameSlice = createSlice({
     add: (state) => {
       state.names.push(DEFAULT_NAME);
     },
-    delete: (state, action: PayloadAction<number>) => {
+    remove: (state, action: PayloadAction<number>) => {
       state.names.splice(action.payload, 1);
     },
     rename: (state, action: PayloadAction<{ index: number; name: string }>) => {
@@ -23,3 +24,8 @@ export const rowNameSlice = createSlice({
     },
   },
 });
+
+export const selectRowNames = (state: ReturnType<typeof store.getState>) =>
+  state.rowName.names;
+
+export const { add, remove, rename } = rowNameSlice.actions;

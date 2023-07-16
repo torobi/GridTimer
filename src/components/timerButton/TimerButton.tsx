@@ -1,10 +1,32 @@
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectTimersIsRunning,
+  startAt,
+  stopAll,
+} from "../../store/slice/timersStateSlice";
+import {
+  increase,
+  selectTimersCount,
+} from "../../store/slice/timersCountSlice";
+import { selectRowNames } from "../../store/slice/rowNameSlice";
 
-function TimerButton() {
-  const [title, setTitle] = useState("section");
+interface TimerButtonProps {
+  colIndex: number;
+  rowIndex: number;
+}
 
-  const [isStop, setIsStop] = useState(true);
-  const [count, setCount] = useState(0);
+function TimerButton({ colIndex, rowIndex }: TimerButtonProps) {
+  const dispatch = useDispatch();
+
+  const timersCount = useSelector(selectTimersCount);
+  const count = timersCount[colIndex][rowIndex];
+
+  const rowNames = useSelector(selectRowNames);
+  const rowName = rowNames[rowIndex];
+
+  const timersIsRunning = useSelector(selectTimersIsRunning);
+  const isRunning = timersIsRunning[colIndex][rowIndex];
 
   const intervalRef = useRef<number | null>(null);
   const start = useCallback(() => {
@@ -12,9 +34,9 @@ function TimerButton() {
       return;
     }
     intervalRef.current = setInterval(() => {
-      setCount((c) => c + 1);
+      dispatch(increase({ row: rowIndex, col: colIndex }));
     }, 1000);
-  }, []);
+  }, [dispatch, colIndex, rowIndex]);
 
   const stop = useCallback(() => {
     if (intervalRef.current === null) {
@@ -23,16 +45,25 @@ function TimerButton() {
     clearInterval(intervalRef.current);
     intervalRef.current = null;
   }, []);
+
+  useEffect(() => {
+    if (isRunning) {
+      start();
+    } else {
+      stop();
+    }
+  }, [isRunning, start, stop]);
+
   return (
     <div
       onClick={() => {
-        if (isStop) {
-          start();
-        } else {
-          stop();
-        }
+        dispatch(stopAll());
+        dispatch(startAt({ row: rowIndex, col: colIndex }));
       }}
-    ></div>
+    >
+      {rowName}
+      {count}
+    </div>
   );
 }
 

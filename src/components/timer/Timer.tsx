@@ -1,5 +1,7 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { rename } from "../../store/slice/colNameSlice";
+import { selectRowNames } from "../../store/slice/rowNameSlice";
+import TimerButton from "../timerButton/TimerButton";
 
 interface TimerProps {
   colName: string;
@@ -8,6 +10,8 @@ interface TimerProps {
 
 function Timer({ colName, colIndex }: TimerProps) {
   const dispatch = useDispatch();
+
+  const rowNames = useSelector(selectRowNames);
 
   const nameStyle: React.CSSProperties = { textAlign: "center" };
 
@@ -23,7 +27,11 @@ function Timer({ colName, colIndex }: TimerProps) {
 
       <br />
 
-      <button>+</button>
+      <div>
+        {rowNames.map((_, rowIndex) => {
+          return <TimerButton key={rowIndex} {...{ colIndex, rowIndex }} />;
+        })}
+      </div>
     </>
   );
 }

@@ -1,4 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import store from "../store";
 
 interface InitialState {
   isRunning: boolean[][];
@@ -31,6 +32,10 @@ export const timersStateSlice = createSlice({
       const { row, col } = action.payload;
       state.isRunning[col][row] = !state.isRunning[col][row];
     },
+    startAt: (state, action: PayloadAction<{ row: number; col: number }>) => {
+      const { row, col } = action.payload;
+      state.isRunning[col][row] = true;
+    },
     stopAll: (state) => {
       const col = Array<boolean>(state.isRunning.length).fill(false);
       for (let colIdx = 0; colIdx < state.isRunning.length; colIdx++) {
@@ -39,3 +44,9 @@ export const timersStateSlice = createSlice({
     },
   },
 });
+
+export const selectTimersIsRunning = (
+  state: ReturnType<typeof store.getState>
+) => state.timersState.isRunning;
+
+export const { startAt, stopAll } = timersStateSlice.actions;
