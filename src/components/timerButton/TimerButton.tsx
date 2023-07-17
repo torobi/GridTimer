@@ -59,7 +59,7 @@ function TimerButton({ colIndex, rowIndex }: TimerButtonProps) {
   const buttonContainerStyle: React.CSSProperties = {
     display: "flex",
     flexFlow: "column",
-    backgroundColor: "#3d3d3d",
+    backgroundColor: isRunning ? "#47b45d" : "#3d3d3d",
     margin: "10px",
     padding: "10px",
     borderRadius: "10px",
