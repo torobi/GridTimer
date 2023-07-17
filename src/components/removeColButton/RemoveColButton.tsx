@@ -1,8 +1,10 @@
 import { useSelector } from "react-redux";
 import { useColRemover } from "../../hooks/useTimerRemover";
 import { selectColNames } from "../../store/slice/colNameSlice";
+import { css } from "@emotion/react";
 
 interface RemoveColButtonProps {
+  rowIndex: number;
   colIndex: number;
 }
 
@@ -10,13 +12,14 @@ function RemoveColButton({ colIndex }: RemoveColButtonProps) {
   const removeCol = useColRemover();
   const colNames = useSelector(selectColNames);
 
-  const buttonStyle: React.CSSProperties = {
-    width: "50px",
-  };
+  const buttonStyle = css`
+    grid-row: -3;
+    grid-column: ${colIndex + 1};
+  `;
 
   return (
     <button
-      style={buttonStyle}
+      css={buttonStyle}
       onClick={() => {
         if (colNames.length > 1) {
           removeCol(colIndex);

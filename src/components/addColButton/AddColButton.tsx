@@ -1,15 +1,17 @@
+import { css } from "@emotion/react";
 import { useColAdder } from "../../hooks/useTimerAdder";
 
 function AddColButton() {
   const addCol = useColAdder();
 
-  const buttonStyle: React.CSSProperties = {
-    width: "50px",
-  };
+  const buttonStyle = css`
+    grid-row: 2 / -3;
+    grid-column: -2;
+  `;
 
   return (
     <button
-      style={buttonStyle}
+      css={buttonStyle}
       onClick={() => {
         addCol();
       }}

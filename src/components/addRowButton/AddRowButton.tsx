@@ -1,29 +1,23 @@
+import { css } from "@emotion/react";
 import { useRowAdder } from "../../hooks/useTimerAdder";
 
 function AddRowButton() {
   const addRow = useRowAdder();
 
-  const buttonStyle: React.CSSProperties = {
-    width: "calc(100% - 50px)",
-  };
-
-  const buttonContainer: React.CSSProperties = {
-    width: "100%",
-    display: "flex",
-    justifyContent: "left",
-  };
+  const buttonStyle = css`
+    grid-row: -2;
+    grid-column: 1 / -3;
+  `;
 
   return (
-    <div style={buttonContainer}>
-      <button
-        style={buttonStyle}
-        onClick={() => {
-          addRow();
-        }}
-      >
-        +
-      </button>
-    </div>
+    <button
+      css={buttonStyle}
+      onClick={() => {
+        addRow();
+      }}
+    >
+      +
+    </button>
   );
 }
 

@@ -10,6 +10,7 @@ import {
   selectTimersCount,
 } from "../../store/slice/timersCountSlice";
 import { rename, selectRowNames } from "../../store/slice/rowNameSlice";
+import { css } from "@emotion/react";
 
 interface TimerButtonProps {
   colIndex: number;
@@ -79,22 +80,44 @@ function TimerButton({ colIndex, rowIndex }: TimerButtonProps) {
     };
   }, [isRunning, start, stop]);
 
-  const nameStyle: React.CSSProperties = {
-    textAlign: "center",
-  };
-  const buttonContainerStyle: React.CSSProperties = {
-    display: "flex",
-    flexFlow: "column",
-    backgroundColor: isRunning ? "#47b45d" : "#3d3d3d",
-    color: isRunning ? "#0a1b0e" : "#ffffff",
-    margin: "10px",
-    padding: "10px",
-    borderRadius: "10px",
+  const textColor = isRunning ? "#0a1b0e" : "#ffffff";
+
+  const Style = {
+    name: css`
+      margin: 10px;
+
+      padding: 0;
+      background: none;
+      border: none;
+      border-radius: 0;
+      outline: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+
+      border-bottom: 1px solid ${textColor};
+      color: ${textColor};
+
+      text-align: center;
+    `,
+    buttonContainer: css`
+      display: flex;
+      flex-flow: column;
+      background-color: ${isRunning ? "#47b45d" : "#3d3d3d"};
+      color: ${textColor};
+      border-radius: 10px;
+
+      grid-row: ${rowIndex + 2};
+      grid-column: ${colIndex + 1};
+
+      font-weight: 600;
+    `,
+    time: css``,
   };
 
   return (
     <div
-      style={buttonContainerStyle}
+      css={Style.buttonContainer}
       onClick={() => {
         dispatch(stopAll());
         if (!isRunning) {
@@ -103,7 +126,7 @@ function TimerButton({ colIndex, rowIndex }: TimerButtonProps) {
       }}
     >
       <input
-        style={nameStyle}
+        css={Style.name}
         value={rowName}
         onChange={(ev) =>
           dispatch(rename({ index: rowIndex, name: ev.target.value }))
@@ -112,7 +135,8 @@ function TimerButton({ colIndex, rowIndex }: TimerButtonProps) {
           ev.stopPropagation();
         }}
       />
-      {secToHMS(count)}
+
+      <div css={Style.time}>{secToHMS(count)}</div>
     </div>
   );
 }

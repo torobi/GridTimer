@@ -1,20 +1,14 @@
 import "./App.css";
-import AddColButton from "./components/addColButton/AddColButton";
-import AddRowButton from "./components/addRowButton/AddRowButton";
-import TimerList from "./components/timerList/TimerList";
+import { TimerGrid } from "./components/timerGrid/TimerGrid";
+import { useRowAdder } from "./hooks/useTimerAdder";
 
 function App() {
-  const hContainer: React.CSSProperties = {
-    display: "flex",
-  };
+  const addRow = useRowAdder();
+  addRow();
 
   return (
     <>
-      <div style={hContainer}>
-        <TimerList />
-        <AddColButton />
-      </div>
-      <AddRowButton />
+      <TimerGrid />
     </>
   );
 }
