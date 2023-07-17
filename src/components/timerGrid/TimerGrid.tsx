@@ -37,6 +37,9 @@ function TimerGrid() {
     colName: (colIndex: number) => {
       return css`
         text-align: center;
+        border: none;
+        border-radius: 10px;
+
         grid-column: ${colIndex + 1};
         grid-row: 1;
       `;
@@ -48,6 +51,7 @@ function TimerGrid() {
       return (
         <input
           css={Style.colName(colIndex)}
+          placeholder="timer title"
           value={colName}
           onChange={(ev) =>
             dispatch(rename({ index: colIndex, name: ev.target.value }))

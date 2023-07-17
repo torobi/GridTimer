@@ -89,6 +89,14 @@ function TimerButton({ colIndex, rowIndex }: TimerButtonProps) {
       grid-column: ${colIndex + 1};
 
       font-weight: 600;
+
+      cursor: pointer;
+
+      transition: all 0.3s;
+
+      :hover {
+        filter: brightness(1.2);
+      }
     `,
     time: css``,
   };
@@ -105,6 +113,7 @@ function TimerButton({ colIndex, rowIndex }: TimerButtonProps) {
     >
       <input
         css={Style.name}
+        placeholder="detail"
         value={rowName}
         onChange={(ev) =>
           dispatch(rename({ index: rowIndex, name: ev.target.value }))
