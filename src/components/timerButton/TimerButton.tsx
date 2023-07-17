@@ -4,6 +4,7 @@ import {
   selectTimersIsRunning,
   startAt,
   stopAll,
+  toggle,
 } from "../../store/slice/timersStateSlice";
 import {
   increase,
@@ -77,6 +78,8 @@ function TimerButton({ colIndex, rowIndex }: TimerButtonProps) {
       color: ${textColor};
 
       text-align: center;
+
+      user-select: none;
     `,
     buttonContainer: css`
       display: flex;
@@ -89,6 +92,7 @@ function TimerButton({ colIndex, rowIndex }: TimerButtonProps) {
       grid-column: ${colIndex + 1};
 
       font-weight: 600;
+      user-select: none;
 
       cursor: pointer;
 
@@ -104,10 +108,14 @@ function TimerButton({ colIndex, rowIndex }: TimerButtonProps) {
   return (
     <div
       css={Style.buttonContainer}
-      onClick={() => {
-        dispatch(stopAll());
-        if (!isRunning) {
-          dispatch(startAt({ row: rowIndex, col: colIndex }));
+      onClick={(ev) => {
+        if (ev.shiftKey) {
+          dispatch(toggle({ row: rowIndex, col: colIndex }));
+        } else {
+          dispatch(stopAll());
+          if (!isRunning) {
+            dispatch(startAt({ row: rowIndex, col: colIndex }));
+          }
         }
       }}
     >

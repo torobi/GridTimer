@@ -55,6 +55,7 @@ export const selectTimersIsRunning = (
 ) => state.timersState.isRunning;
 
 export const {
+  toggle,
   startAt,
   stopAll,
   addCol,

@@ -7,6 +7,7 @@ function AddColButton() {
   const buttonStyle = css`
     grid-row: 2 / -3;
     grid-column: -2;
+    user-select: none;
   `;
 
   return (

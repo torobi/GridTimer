@@ -14,6 +14,7 @@ function RemoveColButton({ rowIndex }: RemoveRowButtonProps) {
   const buttonStyle = css`
     grid-row: ${rowIndex + 2};
     grid-column: -3;
+    user-select: none;
   `;
 
   return (

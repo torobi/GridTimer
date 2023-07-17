@@ -7,6 +7,7 @@ function AddRowButton() {
   const buttonStyle = css`
     grid-row: -2;
     grid-column: 1 / -3;
+    user-select: none;
   `;
 
   return (
