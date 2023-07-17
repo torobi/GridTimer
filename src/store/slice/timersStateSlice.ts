@@ -12,9 +12,10 @@ export const timersStateSlice = createSlice({
   } as InitialState,
   reducers: {
     addRow: (state) => {
-      state.isRunning.forEach((row) => {
-        row.push(false);
-      });
+      for (let colIdx = 0; colIdx < state.isRunning.length; colIdx++) {
+        const col = [...state.isRunning[colIdx], false];
+        state.isRunning[colIdx] = col;
+      }
     },
     deleteRow: (state, action: PayloadAction<number>) => {
       state.isRunning.forEach((row) => {
@@ -22,7 +23,7 @@ export const timersStateSlice = createSlice({
       });
     },
     addCol: (state) => {
-      const col = Array<boolean>(state.isRunning.length).fill(false);
+      const col = Array<boolean>(state.isRunning[0].length).fill(false);
       state.isRunning.push(col);
     },
     deleteCel: (state, action: PayloadAction<number>) => {
@@ -37,9 +38,10 @@ export const timersStateSlice = createSlice({
       state.isRunning[col][row] = true;
     },
     stopAll: (state) => {
-      const col = Array<boolean>(state.isRunning.length).fill(false);
       for (let colIdx = 0; colIdx < state.isRunning.length; colIdx++) {
-        state.isRunning[colIdx] = [...col];
+        for (let rowIdx = 0; rowIdx < state.isRunning[0].length; rowIdx++) {
+          state.isRunning[colIdx][rowIdx] = false;
+        }
       }
     },
   },

@@ -15,6 +15,10 @@ export const timersCountSlice = createSlice({
       state.count.forEach((row) => {
         row.push(0);
       });
+      for (let colIdx = 0; colIdx < state.count.length; colIdx++) {
+        const col = [...state.count[colIdx], 0];
+        state.count[colIdx] = col;
+      }
     },
     deleteRow: (state, action: PayloadAction<number>) => {
       state.count.forEach((row) => {
@@ -22,7 +26,7 @@ export const timersCountSlice = createSlice({
       });
     },
     addCol: (state) => {
-      const col = Array<number>(state.count.length).fill(0);
+      const col = Array<number>(state.count[0].length).fill(0);
       state.count.push(col);
     },
     deleteCel: (state, action: PayloadAction<number>) => {

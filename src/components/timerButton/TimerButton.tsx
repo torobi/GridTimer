@@ -9,7 +9,7 @@ import {
   increase,
   selectTimersCount,
 } from "../../store/slice/timersCountSlice";
-import { selectRowNames } from "../../store/slice/rowNameSlice";
+import { rename, selectRowNames } from "../../store/slice/rowNameSlice";
 
 interface TimerButtonProps {
   colIndex: number;
@@ -47,21 +47,41 @@ function TimerButton({ colIndex, rowIndex }: TimerButtonProps) {
   }, []);
 
   useEffect(() => {
-    if (isRunning) {
-      start();
-    } else {
-      stop();
-    }
+    // if (isRunning) {
+    //   start();
+    // } else {
+    //   stop();
+    // }
+    console.log(isRunning);
   }, [isRunning, start, stop]);
+
+  const nameStyle: React.CSSProperties = { textAlign: "center" };
+  const buttonContainerStyle: React.CSSProperties = {
+    display: "flex",
+    flexFlow: "column",
+    backgroundColor: "#3d3d3d",
+    margin: "10px",
+    padding: "10px",
+    borderRadius: "10px",
+  };
 
   return (
     <div
+      style={buttonContainerStyle}
       onClick={() => {
         dispatch(stopAll());
-        dispatch(startAt({ row: rowIndex, col: colIndex }));
+        if (!isRunning) {
+          dispatch(startAt({ row: rowIndex, col: colIndex }));
+        }
       }}
     >
-      {rowName}
+      <input
+        style={nameStyle}
+        value={rowName}
+        onChange={(ev) =>
+          dispatch(rename({ index: rowIndex, name: ev.target.value }))
+        }
+      />
       {count}
     </div>
   );
