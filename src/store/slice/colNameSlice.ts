@@ -22,10 +22,13 @@ export const colNameSlice = createSlice({
     rename: (state, action: PayloadAction<{ index: number; name: string }>) => {
       state.names[action.payload.index] = action.payload.name;
     },
+    setColNames: (state, action: PayloadAction<string[]>) => {
+      state.names = action.payload;
+    },
   },
 });
 
 export const selectColNames = (state: ReturnType<typeof store.getState>) =>
   state.colName.names;
 
-export const { add, remove, rename } = colNameSlice.actions;
+export const { add, remove, rename, setColNames } = colNameSlice.actions;

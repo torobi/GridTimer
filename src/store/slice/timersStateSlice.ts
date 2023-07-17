@@ -44,6 +44,9 @@ export const timersStateSlice = createSlice({
         }
       }
     },
+    setStates: (state, action: PayloadAction<boolean[][]>) => {
+      state.isRunning = action.payload;
+    },
   },
 });
 
@@ -51,5 +54,12 @@ export const selectTimersIsRunning = (
   state: ReturnType<typeof store.getState>
 ) => state.timersState.isRunning;
 
-export const { startAt, stopAll, addCol, addRow, deleteCol, deleteRow } =
-  timersStateSlice.actions;
+export const {
+  startAt,
+  stopAll,
+  addCol,
+  addRow,
+  deleteCol,
+  deleteRow,
+  setStates,
+} = timersStateSlice.actions;

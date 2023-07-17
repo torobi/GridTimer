@@ -7,11 +7,14 @@ import RemoveColButton from "../removeColButton/RemoveColButton";
 import RemoveRowButton from "../removeRowButton/removeRowButton";
 import AddColButton from "../addColButton/AddColButton";
 import AddRowButton from "../addRowButton/AddRowButton";
+import { useCookieLoad } from "../../hooks/useCookieLoader";
 
 function TimerGrid() {
   const dispatch = useDispatch();
   const colNames = useSelector(selectColNames);
   const rowNames = useSelector(selectRowNames);
+
+  useCookieLoad();
 
   const timerW = "240px";
   const removeRowButtonW = "50px";

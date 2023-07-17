@@ -42,11 +42,14 @@ export const timersCountSlice = createSlice({
       const { row, col } = action.payload;
       state.count[col][row]++;
     },
+    setCounts: (state, action: PayloadAction<number[][]>) => {
+      state.count = action.payload;
+    },
   },
 });
 
 export const selectTimersCount = (state: ReturnType<typeof store.getState>) =>
   state.timersCount.count;
 
-export const { increase, addCol, addRow, deleteCol, deleteRow } =
+export const { increase, addCol, addRow, deleteCol, deleteRow, setCounts } =
   timersCountSlice.actions;
