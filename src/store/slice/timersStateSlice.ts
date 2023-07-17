@@ -26,7 +26,7 @@ export const timersStateSlice = createSlice({
       const col = Array<boolean>(state.isRunning[0].length).fill(false);
       state.isRunning.push(col);
     },
-    deleteCel: (state, action: PayloadAction<number>) => {
+    deleteCol: (state, action: PayloadAction<number>) => {
       state.isRunning.splice(action.payload, 1);
     },
     toggle: (state, action: PayloadAction<{ row: number; col: number }>) => {
@@ -51,4 +51,5 @@ export const selectTimersIsRunning = (
   state: ReturnType<typeof store.getState>
 ) => state.timersState.isRunning;
 
-export const { startAt, stopAll, addCol, addRow } = timersStateSlice.actions;
+export const { startAt, stopAll, addCol, addRow, deleteCol, deleteRow } =
+  timersStateSlice.actions;

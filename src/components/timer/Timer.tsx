@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { rename } from "../../store/slice/colNameSlice";
 import { selectRowNames } from "../../store/slice/rowNameSlice";
 import TimerButton from "../timerButton/TimerButton";
+import RemoveColButton from "../removeColButton/RemoveColButton";
 
 interface TimerProps {
   colName: string;
@@ -32,6 +33,8 @@ function Timer({ colName, colIndex }: TimerProps) {
           return <TimerButton key={rowIndex} {...{ colIndex, rowIndex }} />;
         })}
       </div>
+
+      <RemoveColButton {...{ colIndex }} />
     </div>
   );
 }

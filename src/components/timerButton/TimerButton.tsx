@@ -16,6 +16,28 @@ interface TimerButtonProps {
   rowIndex: number;
 }
 
+function secToHMS(seconds: number): string {
+  const hour = Math.floor(seconds / 3600);
+  const min = Math.floor((seconds % 3600) / 60);
+  const sec = seconds % 60;
+  let hh;
+  // hour が3桁以上の場合は左0埋めをしない
+  if (hour < 100) {
+    hh = `00${hour}`.slice(-2);
+  } else {
+    hh = hour;
+  }
+  const mm = `00${min}`.slice(-2);
+  const ss = `00${sec}`.slice(-2);
+  let time = "";
+  if (hour !== 0) {
+    time = `${hh}:${mm}:${ss}`;
+  } else {
+    time = `${mm}:${ss}`;
+  }
+  return time;
+}
+
 function TimerButton({ colIndex, rowIndex }: TimerButtonProps) {
   const dispatch = useDispatch();
 
@@ -52,13 +74,19 @@ function TimerButton({ colIndex, rowIndex }: TimerButtonProps) {
     } else {
       stop();
     }
+    return () => {
+      stop();
+    };
   }, [isRunning, start, stop]);
 
-  const nameStyle: React.CSSProperties = { textAlign: "center" };
+  const nameStyle: React.CSSProperties = {
+    textAlign: "center",
+  };
   const buttonContainerStyle: React.CSSProperties = {
     display: "flex",
     flexFlow: "column",
     backgroundColor: isRunning ? "#47b45d" : "#3d3d3d",
+    color: isRunning ? "#0a1b0e" : "#ffffff",
     margin: "10px",
     padding: "10px",
     borderRadius: "10px",
@@ -80,8 +108,11 @@ function TimerButton({ colIndex, rowIndex }: TimerButtonProps) {
         onChange={(ev) =>
           dispatch(rename({ index: rowIndex, name: ev.target.value }))
         }
+        onClick={(ev) => {
+          ev.stopPropagation();
+        }}
       />
-      {count}
+      {secToHMS(count)}
     </div>
   );
 }
