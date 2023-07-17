@@ -4,7 +4,6 @@ import { selectColNames } from "../../store/slice/colNameSlice";
 import { css } from "@emotion/react";
 
 interface RemoveColButtonProps {
-  rowIndex: number;
   colIndex: number;
 }
 

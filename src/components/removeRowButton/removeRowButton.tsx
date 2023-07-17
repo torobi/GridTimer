@@ -4,11 +4,10 @@ import { selectRowNames } from "../../store/slice/rowNameSlice";
 import { css } from "@emotion/react";
 
 interface RemoveRowButtonProps {
-  colIndex: number;
   rowIndex: number;
 }
 
-function RemoveColButton({ colIndex, rowIndex }: RemoveRowButtonProps) {
+function RemoveColButton({ rowIndex }: RemoveRowButtonProps) {
   const removeRow = useRowRemover();
   const rowNames = useSelector(selectRowNames);
 

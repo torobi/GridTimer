@@ -8,7 +8,7 @@ import RemoveRowButton from "../removeRowButton/removeRowButton";
 import AddColButton from "../addColButton/AddColButton";
 import AddRowButton from "../addRowButton/AddRowButton";
 
-export function TimerGrid() {
+function TimerGrid() {
   const dispatch = useDispatch();
   const colNames = useSelector(selectColNames);
   const rowNames = useSelector(selectRowNames);
@@ -88,3 +88,5 @@ export function TimerGrid() {
     </div>
   );
 }
+
+export default TimerGrid;
