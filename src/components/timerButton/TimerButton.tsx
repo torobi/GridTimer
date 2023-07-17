@@ -47,12 +47,11 @@ function TimerButton({ colIndex, rowIndex }: TimerButtonProps) {
   }, []);
 
   useEffect(() => {
-    // if (isRunning) {
-    //   start();
-    // } else {
-    //   stop();
-    // }
-    console.log(isRunning);
+    if (isRunning) {
+      start();
+    } else {
+      stop();
+    }
   }, [isRunning, start, stop]);
 
   const nameStyle: React.CSSProperties = { textAlign: "center" };
