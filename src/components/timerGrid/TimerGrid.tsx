@@ -53,6 +53,7 @@ function TimerGrid() {
     return colNames.map((colName, colIndex) => {
       return (
         <input
+          key={colIndex}
           css={Style.colName(colIndex)}
           placeholder="timer title"
           value={colName}
@@ -67,14 +68,22 @@ function TimerGrid() {
   const removeColButtons = () => {
     return colNames.map((_, colIndex) => {
       return (
-        <RemoveColButton {...{ rowIndex: 1 + rowNames.length, colIndex }} />
+        <RemoveColButton
+          key={colIndex}
+          {...{ rowIndex: 1 + rowNames.length, colIndex }}
+        />
       );
     });
   };
 
   const removeRowButtons = () => {
     return rowNames.map((_, rowIndex) => {
-      return <RemoveRowButton {...{ rowIndex, colIndex: colNames.length }} />;
+      return (
+        <RemoveRowButton
+          key={rowIndex}
+          {...{ rowIndex, colIndex: colNames.length }}
+        />
+      );
     });
   };
 
@@ -84,7 +93,12 @@ function TimerGrid() {
 
       {colNames.map((_, colIndex) => {
         return rowNames.map((_, rowIndex) => {
-          return <TimerButton {...{ colIndex, rowIndex }} />;
+          return (
+            <TimerButton
+              key={`${colIndex}_${rowIndex}`}
+              {...{ colIndex, rowIndex }}
+            />
+          );
         });
       })}
 
